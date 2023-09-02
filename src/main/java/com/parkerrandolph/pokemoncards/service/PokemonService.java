@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 public class PokemonService {
 
@@ -19,14 +21,26 @@ public class PokemonService {
 
             PokemonInfo pokemonInfo = restTemplate.getForObject(url, PokemonInfo.class);
 
-            Pokemon pokemon = new Pokemon();
+            Optional<Pokemon> pokemonExist = pokemonRepo.findByName(name);
 
-            pokemon.setName(pokemonInfo.getName());
-            pokemon.setWeight(pokemonInfo.getWeight());
-            pokemon.setHeight(pokemonInfo.getHeight());
-            pokemon.setBase_experience(pokemonInfo.getBase_experience());
+            if(pokemonExist.isPresent()){
+                Pokemon exists = pokemonExist.get();
 
-            pokemonRepo.save(pokemon);
+                exists.setName(pokemonInfo.getName());
+                exists.setWeight(pokemonInfo.getWeight());
+                exists.setHeight(pokemonInfo.getHeight());
+                exists.setBase_experience(pokemonInfo.getBase_experience());
+
+            }else {
+                Pokemon pokemon = new Pokemon();
+
+                pokemon.setName(pokemonInfo.getName());
+                pokemon.setWeight(pokemonInfo.getWeight());
+                pokemon.setHeight(pokemonInfo.getHeight());
+                pokemon.setBase_experience(pokemonInfo.getBase_experience());
+
+                pokemonRepo.save(pokemon);
+            }
 
             return pokemonInfo;
     }

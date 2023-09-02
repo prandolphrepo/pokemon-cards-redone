@@ -21,7 +21,6 @@ public class PokemonController {
     @GetMapping("/pokemon")
     public @ResponseBody PokemonInfo pokemon(@RequestParam String name){
         try {
-
             return pokemonService.getPokemon(name);
         }catch(HttpClientErrorException e){
             System.out.println("Client Error 404, Not Found");
