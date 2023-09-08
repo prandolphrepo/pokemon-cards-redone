@@ -1,12 +1,9 @@
 package com.parkerrandolph.pokemoncards.models;
 
-import java.util.List;
 
 public class PokemonInfo {
 
     private String name;
-
-    private List<Type> types;
     private long id;
     private long weight;
     private long height;
@@ -16,10 +13,6 @@ public class PokemonInfo {
 
     public String getName() {
         return name;
-    }
-
-    public List<Type> getTypes(){
-        return types;
     }
 
 
@@ -38,6 +31,8 @@ public class PokemonInfo {
     public long getId() {
         return id;
     }
+
+    
 
 
 }

@@ -36,7 +36,6 @@ public class Pokemon {
         this.height = height;
     }
 
-
     public void setBase_experience(long base_experience) {
         this.base_experience = base_experience;
     }
