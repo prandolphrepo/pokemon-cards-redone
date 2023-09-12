@@ -10,6 +10,7 @@ public class Pokemon {
 
     @Column(unique = true, nullable = false)
     private String name;
+    
     @Column
     private long weight;
 
